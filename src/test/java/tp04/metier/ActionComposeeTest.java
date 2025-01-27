@@ -30,4 +30,13 @@ public class ActionComposeeTest {
     public void testSomeMethod() {
     }
 
+    @Test
+    void testToString() {
+        // Créer 2 Action Simple
+
+        // Créer une action composée
+        // Associer les action simple à l'action composée
+        // assertEquals sur le résultat de toString()
+    }
+
 }

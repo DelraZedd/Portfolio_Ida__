@@ -38,6 +38,15 @@ public class ActionComposee extends Action {
         return valeur;
     }
 
+    @Override
+    public String toString() {
+        String str = new String("");
+        for (ActionSimple key : this.mapPanier.keySet()) {
+            str = str + key.getLibelle() + " : " + this.mapPanier.get(key);
+        }
+        return str;
+    }
+
     // public void afficherPerformancesIndividuelles(Jour j) {
 
     // return null;
