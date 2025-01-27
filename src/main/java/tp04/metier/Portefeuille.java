@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Portefeuille {
     
-    Map<Action, LignePortefeuille> mapLignes;
+    public Map<Action, LignePortefeuille> mapLignes;
     
     private class LignePortefeuille {
         
@@ -49,7 +49,11 @@ public class Portefeuille {
     }
     
     public void acheter(Action a, int q) {
-        if (this.mapLignes.containsKey(a) == false) {
+
+        if (q <= 0)
+            return;
+    
+        if (!this.mapLignes.containsKey(a)) {
             this.mapLignes.put(a, new LignePortefeuille(a, q));
         } else {
             this.mapLignes.get(a).setQte(this.mapLignes.get(a).getQte() + q);
@@ -57,7 +61,7 @@ public class Portefeuille {
     }
 
     public void vendre(Action a, int q) {
-        if (this.mapLignes.containsKey(a) == true) {
+        if (this.mapLignes.containsKey(a)) {
             if (this.mapLignes.get(a).getQte() > q) {
                 this.mapLignes.get(a).setQte(this.mapLignes.get(a).getQte() - q);
             } else if (this.mapLignes.get(a).getQte() == q) {
@@ -76,5 +80,30 @@ public class Portefeuille {
             total = total + (lp.getQte() * lp.getAction().valeur(j));
         }
         return total;
+    }
+
+    /**
+     * Retourne la quantité associée à une action dans le portefeuille.
+     */
+    public int getQuantiteAction(Action action) {
+        if (this.mapLignes.containsKey(action)) {
+            return this.mapLignes.get(action).getQte();
+        } else {
+            return 0; // Retourne 0 si l'action n'est pas présente
+        }
+    }
+
+    /**
+     * Retourne toutes les actions et leurs quantités sous forme de texte.
+     */
+    public String afficherPortefeuille() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Action, LignePortefeuille> entry : mapLignes.entrySet()) {
+            sb.append(entry.getKey().getLibelle())
+              .append(": ")
+              .append(entry.getValue().getQte())
+              .append("\n");
+        }
+        return sb.toString();
     }
 }

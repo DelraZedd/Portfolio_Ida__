@@ -11,5 +11,20 @@ package tp04.metier;
  * @author perussel
  */
 public class Cours {
-    
+    private float valeur;
+    private Jour jour;
+
+    public Cours(Jour j, float v) {
+        this.jour = j;
+        this.valeur = v;
+    }
+
+    public float getPrix() {
+        return valeur;
+    }
+
+    public Jour getJour() {
+        return jour;
+    }
+
 }

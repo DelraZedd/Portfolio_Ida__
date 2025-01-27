@@ -38,4 +38,9 @@ public class ActionComposee extends Action {
         return valeur;
     }
 
+    // public void afficherPerformancesIndividuelles(Jour j) {
+
+    // return null;
+    // }
+
 }
