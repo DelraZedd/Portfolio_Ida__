@@ -42,7 +42,7 @@ public class ActionComposee extends Action {
     public String toString() {
         String str = new String("");
         for (ActionSimple key : this.mapPanier.keySet()) {
-            str = str + key.getLibelle() + " : " + this.mapPanier.get(key);
+            str = str + key.getLibelle() + " : " + this.mapPanier.get(key) + ", ";
         }
         return str;
     }
