@@ -38,6 +38,27 @@ public class ActionComposee extends Action {
         return valeur;
     }
 
+    public String visualiserCours(Jour jInf, Jour jSup) {
+        // pour chaque jour de jInf jusqu'à jSup, on affiche le cours de mapCours
+        int nbJourJSup = (jSup.getAnnee() - jInf.getAnnee()) * 365 + jSup.getNoJour();
+        String str = new String();
+        for (int i = jInf.getNoJour(); i < nbJourJSup + 1; i++) {
+            // Si une évolution dans mapCours, alors on sysout le cours et le jour
+            int anneeDiff = i / 365;
+            int anneeReel = jInf.getAnnee() + anneeDiff;
+            int jourReel = i % 365;
+            Jour jReel = new Jour(anneeReel, jourReel);
+            // Pour chaque action simple de l'action composée
+            for (ActionSimple as : mapPanier.keySet()) {
+                if (as.getMapCours().containsKey(jReel)) {
+                    str += "Action " + as.getLibelle() + " Jour : " + jReel.toString() + " Cours : " + as.valeur(jReel)
+                            + "\n";
+                }
+            }
+        }
+        return str;
+    }
+
     @Override
     public String toString() {
         String str = "";

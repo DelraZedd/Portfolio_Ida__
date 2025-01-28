@@ -42,19 +42,23 @@ public class ActionSimple extends Action {
 
     public String visualiserCours(Jour jInf, Jour jSup) {
         // pour chaque jour de jInf jusqu'à jSup, on affiche le cours de mapCours
-        int nbJourJSup = (jInf.getAnnee() - jSup.getAnnee()) * 365 + jSup.getNoJour();
+        int nbJourJSup = (jSup.getAnnee() - jInf.getAnnee()) * 365 + jSup.getNoJour();
         String str = new String();
-        for (int i = jInf.getNoJour(); i < nbJourJSup; i++) {
+        for (int i = jInf.getNoJour(); i < nbJourJSup + 1; i++) {
             // Si une évolution dans mapCours, alors on sysout le cours et le jour
             int anneeDiff = i / 365;
             int anneeReel = jInf.getAnnee() + anneeDiff;
             int jourReel = i % 365;
             Jour jReel = new Jour(anneeReel, jourReel);
             if (mapCours.containsKey(jReel)) {
-                str += "Jour : " + jReel.toString() + " Cours : " + mapCours.get(jReel) + "\n";
+                str += "Jour : " + jReel.toString() + " Cours : " + mapCours.get(jReel).getValeur() + "\n";
             }
         }
         return str;
+    }
+
+    public Map<Jour, Cours> getMapCours() {
+        return mapCours;
     }
 
     // encapsulation de la définition de la classe Cours
@@ -78,4 +82,5 @@ public class ActionSimple extends Action {
         }
 
     }
+
 }
