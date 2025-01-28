@@ -16,11 +16,14 @@ public class Run {
     public static void main(String[] args) {
         ActionSimple bnp, axa;
         ActionComposee bqAss;
-        Jour j1, j2;
+        Jour j1, j2, j3, j4, j5;
 
         // init des objets metiers Jour
         j1 = new Jour(2014, 1);
         j2 = new Jour(2014, 2);
+        j3 = new Jour(2014, 3);
+        j4 = new Jour(2014, 4);
+        j5 = new Jour(2014, 5);
 
         // creation d'actions simples et composée
         bnp = new ActionSimple("BNP");
@@ -32,8 +35,15 @@ public class Run {
         // enrg. de 2 cours pour chaque action 
         axa.enrgCours(j1, 200);
         axa.enrgCours(j2, 250);
+        axa.enrgCours(j3, 421);
+        axa.enrgCours(j4, 312);
+        axa.enrgCours(j5, 201);
+        
         bnp.enrgCours(j1, 100);
         bnp.enrgCours(j2, 200);
+        axa.enrgCours(j3, 77);
+        axa.enrgCours(j4, 38);
+        axa.enrgCours(j5, 31);
         // affichage des cours - comme 1 action simple et 1 action
         System.out.println("Action simple *bnp* à j1 : " + bnp.valeur(j1));
         System.out.println("Action *Banque-Assurance* à j2 : " + bqAss.valeur(j2));

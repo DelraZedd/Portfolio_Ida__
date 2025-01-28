@@ -64,5 +64,9 @@ public class Jour {
         }
         return true;
     }
+
+    public boolean isBiggerOrEquals(Jour j1) {
+        return (this.annee * 365.25 + this.noJour) >= (j1.annee * 365.25 + j1.noJour);
+    }
   
 }

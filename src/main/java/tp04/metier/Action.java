@@ -56,4 +56,15 @@ public abstract class Action {
     public String toString() {
         return this.getLibelle();
     }
+
+    public double simulation(Jour jd, Jour jf, int qte) {
+
+        if (qte <= 0)
+            return 0.0; 
+
+        if (jd.isBiggerOrEquals(jf))
+            throw new IllegalArgumentException("Les dates ne sont pas comformes.");
+
+        return (this.valeur(jf) - this.valeur(jd)) * qte;
+    }
 }
