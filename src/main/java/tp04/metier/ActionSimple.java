@@ -40,10 +40,10 @@ public class ActionSimple extends Action {
             return 0; // definition d'une constante possible
     }
 
-    public void visualiserCours(Jour jInf, Jour jSup) {
+    public String visualiserCours(Jour jInf, Jour jSup) {
         // pour chaque jour de jInf jusqu'à jSup, on affiche le cours de mapCours
         int nbJourJSup = (jInf.getAnnee() - jSup.getAnnee()) * 365 + jSup.getNoJour();
-
+        String str = new String();
         for (int i = jInf.getNoJour(); i < nbJourJSup; i++) {
             // Si une évolution dans mapCours, alors on sysout le cours et le jour
             int anneeDiff = i / 365;
@@ -51,9 +51,10 @@ public class ActionSimple extends Action {
             int jourReel = i % 365;
             Jour jReel = new Jour(anneeReel, jourReel);
             if (mapCours.containsKey(jReel)) {
-                System.out.println("Jour : " + jReel.toString() + " Cours : " + mapCours.get(jReel));
+                str += "Jour : " + jReel.toString() + " Cours : " + mapCours.get(jReel) + "\n";
             }
         }
+        return str;
     }
 
     // encapsulation de la définition de la classe Cours

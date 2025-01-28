@@ -24,7 +24,6 @@ public class Jour {
         return annee;
     }
 
-
     /**
      * Get the value of noJour
      *
@@ -64,5 +63,9 @@ public class Jour {
         }
         return true;
     }
-  
+
+    @Override
+    public String toString() {
+        return this.annee + " " + this.noJour;
+    }
 }
