@@ -19,7 +19,7 @@ public class Cours {
         this.valeur = v;
     }
 
-    public float getPrix() {
+    public float getValeur() {
         return valeur;
     }
 

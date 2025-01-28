@@ -48,9 +48,9 @@ public class PortefeuilleTest {
         portefeuille.acheter(action, 0);
 
         // Assert
-        assertFalse(portefeuille.mapLignes.containsKey(action), "Aucune action ne doit être ajoutée pour une quantité de 0.");
+        assertFalse(portefeuille.mapLignes.containsKey(action),
+                "Aucune action ne doit être ajoutée pour une quantité de 0.");
     }
-
 
     @Test
     public void testAcheterQuantiteInvalide() {
@@ -62,7 +62,8 @@ public class PortefeuilleTest {
         portefeuille.acheter(action, -5);
 
         // Assert
-        assertFalse(portefeuille.mapLignes.containsKey(action), "Aucune action ne doit être ajoutée pour une quantité de 0.");
+        assertFalse(portefeuille.mapLignes.containsKey(action),
+                "Aucune action ne doit être ajoutée pour une quantité de 0.");
     }
 
     @Test
@@ -104,7 +105,8 @@ public class PortefeuilleTest {
         portefeuille.vendre(action, 5);
 
         // Assert
-        assertFalse(portefeuille.mapLignes.containsKey(action), "Aucune action ne doit être présente dans le portefeuille.");
+        assertFalse(portefeuille.mapLignes.containsKey(action),
+                "Aucune action ne doit être présente dans le portefeuille.");
     }
 
     @Test
@@ -126,5 +128,52 @@ public class PortefeuilleTest {
 
         // Assert
         assertEquals(800, valeurTotale, 0.001, "La valeur totale du portefeuille doit être 800.");
+    }
+
+    public void testValeurPortefeuille(float resultatAttendu, Portefeuille portefeuille, Jour jourATester) {
+
+        // Exécution
+        float result = portefeuille.valeur(jourATester);
+
+        // Assertion
+        assertEquals(resultatAttendu, result, "La valeur retournée par la méthode est incorrecte");
+    }
+
+    @Test
+    void testValeurAvecExemple() {
+        // Création de jours pour les tests
+        Jour j1 = new Jour(2014, 1);
+        Jour j2 = new Jour(2014, 2);
+
+        // Création d'actions simples
+        ActionSimple bnp = new ActionSimple("BNP");
+        ActionSimple axa = new ActionSimple("AXA");
+
+        // Enregistrement des cours pour chaque action
+        axa.enrgCours(j1, 200);
+        axa.enrgCours(j2, 250);
+        bnp.enrgCours(j1, 100);
+        bnp.enrgCours(j2, 200);
+
+        // Création de portefeuilles
+        Portefeuille p1 = new Portefeuille();
+        Portefeuille p2 = new Portefeuille();
+        Portefeuille p3 = new Portefeuille();
+
+        // Remplissage des portefeuilles
+        p2.acheter(axa, 10); // Portefeuille p2 achète 10 actions AXA
+        p3.acheter(axa, 10); // Portefeuille p3 achète 10 actions AXA
+
+        // Tester la valeur pour un portefeuille vide
+        testValeurPortefeuille(0.0f, p1, j1);
+
+        // Test de la valeur pour p2 au jour j1
+        testValeurPortefeuille(2000.0f, p2, j1);
+
+        // Modification du portefeuille p2
+        p2.vendre(axa, 5);
+
+        // Vérification après vente
+        testValeurPortefeuille(1000.0f, p2, j1); // Attente : 5 actions AXA à 200 chacune
     }
 }

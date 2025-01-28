@@ -39,8 +39,11 @@ public class ActionComposee extends Action {
     }
 
     // public void afficherPerformancesIndividuelles(Jour j) {
+    // float perf = 0;
+    // for (Action key : mapPanier.keySet()) {
+    // perf = key
+    // }
 
-    // return null;
     // }
 
 }

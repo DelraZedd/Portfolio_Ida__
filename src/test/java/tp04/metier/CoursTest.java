@@ -12,7 +12,7 @@ class CoursTest {
     @Test
     void testGetPrix() {
         final Cours cours1 = new Cours(new Jour(2025, 1), 45);
-        assertEquals(45, cours1.getPrix());
+        assertEquals(45, cours1.getValeur());
     }
 
     @Test
