@@ -40,9 +40,16 @@ public class ActionComposee extends Action {
 
     @Override
     public String toString() {
-        String str = new String("");
+        String str = "";
+        int count = 0;
+        int size = this.mapPanier.size();
+
         for (ActionSimple key : this.mapPanier.keySet()) {
-            str = str + key.getLibelle() + " : " + this.mapPanier.get(key) + ", ";
+            str += key.getLibelle() + " : " + this.mapPanier.get(key);
+            count++;
+            if (count < size) {
+                str += ", ";
+            }
         }
         return str;
     }

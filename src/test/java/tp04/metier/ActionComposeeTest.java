@@ -45,7 +45,7 @@ public class ActionComposeeTest {
         bqAss.enrgComposition(axa, 0.3f);
         bqAss.enrgComposition(bnp, 0.7f);
 
-        final String expectedToString = "BNP : 0.3, AXA : 0.7";
+        final String expectedToString = "BNP : 0.7, AXA : 0.3";
         final String currentToString = bqAss.toString();
 
         // assertEquals sur le résultat de toString()
