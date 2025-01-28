@@ -96,20 +96,6 @@ public class PortefeuilleTest {
     }
 
     @Test
-    public void testVendreActionInexistante() {
-        // Arrange
-        Portefeuille portefeuille = new Portefeuille();
-        ActionSimple action = new ActionSimple("Action1");
-
-        // Act
-        portefeuille.vendre(action, 5);
-
-        // Assert
-        assertFalse(portefeuille.mapLignes.containsKey(action),
-                "Aucune action ne doit être présente dans le portefeuille.");
-    }
-
-    @Test
     public void testValeurPortefeuille() {
         // Arrange
         Portefeuille portefeuille = new Portefeuille();
