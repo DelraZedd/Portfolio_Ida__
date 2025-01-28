@@ -176,4 +176,58 @@ public class PortefeuilleTest {
         // Vérification après vente
         testValeurPortefeuille(1000.0f, p2, j1); // Attente : 5 actions AXA à 200 chacune
     }
+
+    public void testVendreAction(int resultatAttendu, Portefeuille portefeuille, Action action) {
+
+        // Exécution
+        int result = portefeuille.getQuantiteAction(action);
+
+        // Assertion
+        assertEquals(resultatAttendu, result, "La valeur retournée par la méthode est incorrecte");
+    }
+
+    @Test
+    void testVendreAvecExemple() {
+        // Création de jours pour les tests
+        Jour j1 = new Jour(2014, 1);
+
+        // Création d'actions simples
+        ActionSimple bnp = new ActionSimple("BNP");
+        ActionSimple axa = new ActionSimple("AXA");
+
+        // Enregistrement des cours pour chaque action
+        axa.enrgCours(j1, 200);
+        bnp.enrgCours(j1, 100);
+
+        // Création de portefeuilles
+        Portefeuille p1 = new Portefeuille();// vends normal
+        Portefeuille p2 = new Portefeuille();// vends 0
+        Portefeuille p3 = new Portefeuille();// vends trop
+        Portefeuille p4 = new Portefeuille();// vends non existant
+
+        // Remplissage des portefeuilles
+        p1.acheter(axa, 10); // Portefeuille p2 achète 10 actions AXA
+        p2.acheter(axa, 10); // Portefeuille p2 achète 10 actions AXA
+        p3.acheter(axa, 10); // Portefeuille p3 achète 10 actions AXA
+        p4.acheter(axa, 10); // Portefeuille p4 achète 10 actions AXA
+
+        p1.vendre(axa, 5);
+        testVendreAction(5, p1, axa);
+        p2.vendre(axa, 0);
+        testVendreAction(10, p2, axa);
+        // Cas 3 : Vente d'une quantité supérieure au stock disponible
+        Exception exceptionP3 = assertThrows(IllegalArgumentException.class, () -> {
+            p3.vendre(axa, 12);
+        });
+        assertEquals(
+                "La quantité d'actions à vendre doit être inférieure ou égale à la quantité de cette action dans le portefeuille",
+                exceptionP3.getMessage());
+        testVendreAction(10, p3, axa); // La quantité reste inchangée
+
+        // Cas 4 : Vente d'une action non présente dans le portefeuille
+        Exception exceptionP4 = assertThrows(IllegalArgumentException.class, () -> {
+            p4.vendre(bnp, 5);
+        });
+        assertEquals("L'action doit être présente dans le portefeuille", exceptionP4.getMessage());
+    }
 }

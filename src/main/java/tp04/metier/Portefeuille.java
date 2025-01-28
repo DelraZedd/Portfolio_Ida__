@@ -13,27 +13,27 @@ import java.util.Map;
  * @author perussel
  */
 public class Portefeuille {
-    
+
     public Map<Action, LignePortefeuille> mapLignes;
-    
+
     private class LignePortefeuille {
-        
+
         private Action action;
-        
+
         private int qte;
-        
+
         public int getQte() {
             return qte;
         }
-        
+
         public void setQte(int qte) {
             this.qte = qte;
         }
-        
+
         public Action getAction() {
             return this.action;
         }
-        
+
         public LignePortefeuille(Action action, int qte) {
             this.action = action;
             this.qte = qte;
@@ -43,16 +43,16 @@ public class Portefeuille {
             return Integer.toString(qte);
         }
     }
-    
+
     public Portefeuille() {
         this.mapLignes = new HashMap();
     }
-    
+
     public void acheter(Action a, int q) {
 
         if (q <= 0)
             return;
-    
+
         if (!this.mapLignes.containsKey(a)) {
             this.mapLignes.put(a, new LignePortefeuille(a, q));
         } else {
@@ -66,10 +66,15 @@ public class Portefeuille {
                 this.mapLignes.get(a).setQte(this.mapLignes.get(a).getQte() - q);
             } else if (this.mapLignes.get(a).getQte() == q) {
                 this.mapLignes.remove(a);
+            } else {
+                throw new IllegalArgumentException(
+                        "La quantité d'actions à vendre doit être inférieure ou égale à la quantité de cette action dans le portefeuille");
             }
-        }        
+        } else {
+            throw new IllegalArgumentException("L'action doit être présente dans le portefeuille");
+        }
     }
-    
+
     public String toString() {
         return this.mapLignes.toString();
     }
@@ -100,9 +105,9 @@ public class Portefeuille {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Action, LignePortefeuille> entry : mapLignes.entrySet()) {
             sb.append(entry.getKey().getLibelle())
-              .append(": ")
-              .append(entry.getValue().getQte())
-              .append("\n");
+                    .append(": ")
+                    .append(entry.getValue().getQte())
+                    .append("\n");
         }
         return sb.toString();
     }
