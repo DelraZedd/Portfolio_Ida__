@@ -1,13 +1,30 @@
 package tp04.metier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
  * @author MathH
  */
 public class PortefeuilleTest {
+
+    @Test
+    public void testAfficherActions() {
+        Portefeuille portf = new Portefeuille();
+        ActionSimple act = new ActionSimple("Action1");
+        ActionSimple act2 = new ActionSimple("Action2");
+
+        // Act
+        portf.acheter(act, 10);
+        portf.acheter(act2, 2);
+
+        assertEquals("Action1: 10\nAction2: 2\n",portf.afficherPortefeuille(),"Le portefeuille ne sort pas les bonnes actions");
+    }
+
 
     @Test
     public void testAcheterNouvelleAction() {
