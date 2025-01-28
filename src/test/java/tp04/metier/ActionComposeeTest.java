@@ -51,4 +51,33 @@ public class ActionComposeeTest {
         Assertions.assertEquals(expectedToString, currentToString, "Méthode toString ne fonctionne pas");
     }
 
+    @Test
+    void visualiserCours() {
+        Jour jInf = new Jour(2023, 1);
+        Jour jSup = new Jour(2025, 1);
+
+        Jour jInter = new Jour(2024, 1);
+
+        ActionSimple axa = new ActionSimple("AXA");
+        ActionSimple bnp = new ActionSimple("BNP");
+
+        ActionComposee bqAss = new ActionComposee("Banque-Assurance");
+
+        bqAss.enrgComposition(axa, 0.3f);
+        bqAss.enrgComposition(bnp, 0.7f);
+
+        axa.enrgCours(jInf, 100);
+        axa.enrgCours(jInter, 150);
+        axa.enrgCours(jSup, 200);
+
+        bnp.enrgCours(jInf, 120);
+        bnp.enrgCours(jInter, 170);
+        bnp.enrgCours(jSup, 220);
+
+        final String expectedToString = "Action BNP Jour : 2023 1 Cours : 120.0\nAction AXA Jour : 2023 1 Cours : 100.0\nAction BNP Jour : 2024 1 Cours : 170.0\nAction AXA Jour : 2024 1 Cours : 150.0\nAction BNP Jour : 2025 1 Cours : 220.0\nAction AXA Jour : 2025 1 Cours : 200.0\n";
+        final String currentToString = bqAss.visualiserCours(jInf, jSup);
+
+        Assertions.assertEquals(expectedToString, currentToString, "Méthode visualiserCours ne fonctionne pas");
+
+    }
 }
